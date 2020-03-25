@@ -1,1 +1,1 @@
-./Debug/entity.cpp.o ./Debug/main.cpp.o   
+./Debug/Item.cpp.o ./Debug/Utils.cpp.o ./Debug/Inventory.cpp.o ./Debug/Game.cpp.o ./Debug/Player.cpp.o ./Debug/Locations.cpp.o ./Debug/main.cpp.o   

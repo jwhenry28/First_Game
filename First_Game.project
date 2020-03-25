@@ -5,8 +5,25 @@
       <![CDATA[00010001N0005Debug000000000000]]>
     </Plugin>
   </Plugins>
+  <VirtualDirectory Name="lib">
+    <File Name="Locations.h"/>
+    <File Name="Player.h"/>
+    <File Name="Inventory.h"/>
+    <File Name="Item.h"/>
+    <File Name="Utils.h"/>
+    <File Name="Game.h"/>
+  </VirtualDirectory>
   <Description/>
   <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="Locations.cpp"/>
+    <File Name="Player.cpp"/>
+    <File Name="Inventory.cpp"/>
+    <File Name="Item.cpp"/>
+    <File Name="Utils.cpp"/>
+    <File Name="main.cpp"/>
+    <File Name="Game.cpp"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="-std=c++17;-Wall" C_Options="" Assembler="">
@@ -19,9 +36,12 @@
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="MinGW ( MinGW )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-Wall" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
-        <IncludePath Value="."/>
+        <IncludePath Value="./src"/>
+        <IncludePath Value="./lib"/>
       </Compiler>
-      <Linker Options="" Required="yes"/>
+      <Linker Options="" Required="yes">
+        <LibraryPath Value="./lib/"/>
+      </Linker>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
@@ -97,10 +117,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="src">
-    <File Name="entity.cpp"/>
-    <File Name="entity.h"/>
-    <File Name="locations.h"/>
-    <File Name="main.cpp"/>
-  </VirtualDirectory>
 </CodeLite_Project>

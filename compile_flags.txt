@@ -5,5 +5,7 @@
 -Ic:\MinGW\include
 -Ic:\MinGW\lib\gcc\mingw32\8.2.0\include-fixed
 -IC:\Users\jwhen\Desktop\Hacks\Text_Adventure\First_Game
+-IC:\Users\jwhen\Desktop\Hacks\Text_Adventure\First_Game\src
+-IC:\Users\jwhen\Desktop\Hacks\Text_Adventure\First_Game\lib
 -target
 x86_64-pc-windows-gnu

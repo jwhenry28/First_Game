@@ -19,6 +19,10 @@ public:
     
     /* Modifiers */
     inline void setBrief(std::string newBrief) { this->brief = newBrief; }
+    inline Location* getNorth() const { return this->north; }
+    inline Location* getSouth() const { return this->south; }
+    inline Location* getEast() const { return this->east; }
+    inline Location* getWest() const { return this->west; }
     inline void setDescr(std::string newDescr) { this->description = newDescr; }
     inline void setNorth(Location *newLoc) { this->north = newLoc; }
     inline void setSouth(Location *newLoc) { this->south = newLoc; }

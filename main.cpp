@@ -4,8 +4,6 @@ int main()
 {
     Game *game = new Game;
     
-    initialize_main_graph(game);
-    
     std::string choice {};
     bool continue_loop = true;
     std::cout << "=== MAIN MENU ===" << std::endl;
@@ -18,17 +16,21 @@ int main()
     {
         std::getline(std::cin, choice);
         string_tolower(choice);
-
+        
+        /* Start a new game */
         if (choice.compare("0") == 0)
         {
             continue_loop = false;
+            initialize_main_graph(game);
             game->createNewCharacter();
         }
+        /* Load up new graph */
         else if (choice.compare("1") == 0) 
         {
             continue_loop = false;
             game->load();
         }
+        /* Exit */
         else if (choice.compare("q") == 0)
         {
             return 0;
@@ -41,18 +43,13 @@ int main()
     
     std::vector<std::string> args;
     
+    /* Main game loop */
     while (game->getPlaying())
     {
+        game->currLoc->printDescr();
         std::cout << ">";
         args = game->parseChoice();
-        
-        for (size_t i = 0; i < args.size(); i++)
-        {
-            std::cout << "Token " << i + 1 << ": " << args.at(i) << std::endl;
-        }
     }
     
     return 0;
 }
-
-// ********** Notes ********** //

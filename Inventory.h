@@ -8,6 +8,7 @@ class Inventory
 public:
     Inventory();
     ~Inventory();
+    void expand(size_t size);
     void addItem(const Item &item);
     void removeItem(const std::string &str);
     inline void debugPrint() const
@@ -17,12 +18,12 @@ public:
             itemArr[i]->debugPrint();
         }
     }
+    Item& operator[](const size_t index);
     
 private:
     size_t capacity;
     size_t numItems;
     Item **itemArr;
-    void expand(size_t size);
     void initialize(const int from);
 };
 

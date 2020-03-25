@@ -60,7 +60,10 @@ void Location::printLoc()
         std::cout << "West: " << this->west->getName() << std::endl;
     }
     
-    std::cout << std::endl;
+    if (this->north != nullptr || this->south != nullptr || this->east != nullptr || this->west != nullptr)
+    {
+        std::cout << std::endl;
+    }
     
     /* Print items */
     if (this->numItems > 0)
@@ -77,6 +80,30 @@ void Location::printLoc()
         std::cout << std::endl;
     }
 }
+
+
+/* removeItem - Removes an item from the location
+ */
+ void Location::removeItem(const std::string &str)
+ {
+     size_t i, j = 0, removed = 0;
+     for (i = 0; i < this->numItems; i++)
+     {
+         /* Continue if removed item is found */
+         if (this->itemArr[i]->getName().compare(str) == 0)
+         {
+            delete this->itemArr[i];
+            removed++;
+            continue;
+         }
+         
+         /* Overwrite current item with next non-removed item */
+         this->itemArr[j] = this->itemArr[i];
+         j++;
+     }
+     
+     this->numItems -= removed;
+ }
 
 void initialize_main_graph(Game *game)
 {
@@ -103,7 +130,11 @@ void initialize_main_graph(Game *game)
     field->setEast(barn);
     barn->setWest(field);
     
-    field->printLoc();
-    house->printLoc();
-    barn->printLoc();
+    Location **master_graph = new Location*[GRAPH_SIZE];
+    master_graph[0] = field;
+    master_graph[1] = house;
+    master_graph[2] = barn;
+    
+    game->setGraph(master_graph);
+    game->currLoc = field;
 }

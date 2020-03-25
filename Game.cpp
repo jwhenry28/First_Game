@@ -1,18 +1,69 @@
 #include "Game.h"
 #include "Utils.h"
 
+
 Game::Game()
     : graph {nullptr}, choice {0}, playing {true}, fileName {"../save/save"} {
 }
+
 
 Game::~Game()
 {
 }
 
 
-void Game::printGraph()
+/* Modifiers */
+void Game::movePlayer(std::string direction)
 {
-    
+    Location curr = *currLoc;
+    if (direction.compare("north") == 0)
+    {
+        if (curr.getNorth() == nullptr)
+        {
+            std::cout << "You can't go that way!" << std::endl;
+        }
+        else
+        {
+            this->currLoc = currLoc->getNorth();
+        }
+    }
+    else if (direction.compare("south") == 0)
+    {
+        if (curr.getSouth() == nullptr)
+        {
+            std::cout << "You can't go that way!" << std::endl;
+        }
+        else
+        {
+            this->currLoc = currLoc->getSouth();
+        }
+    }
+    else if (direction.compare("east") == 0)
+    {
+        if (curr.getEast() == nullptr)
+        {
+            std::cout << "You can't go that way!" << std::endl;
+        }
+        else
+        {
+            this->currLoc = currLoc->getEast();
+        }
+    }
+    else if (direction.compare("west") == 0)
+    {
+        if (curr.getWest() == nullptr)
+        {
+            std::cout << "You can't go that way!" << std::endl;
+        }
+        else
+        {
+            this->currLoc = currLoc->getWest();
+        }
+    }
+    else
+    {
+        std::cout << "I don't understand that direction..." << std::endl;
+    }
 }
 
 
@@ -51,6 +102,14 @@ std::vector<std::string> Game::parseChoice()
     std::vector<std::string> args((std::istream_iterator<std::string>(iss)),
                                       std::istream_iterator<std::string>());
                                       
+                            
+    /* Handle input */
+    std::string cmd = args.at(0);
+    if (cmd.compare("go") == 0 || cmd.compare("move") == 0)
+    {
+        this->movePlayer(args.at(1));
+    }
+    
     return args;
 }
 
