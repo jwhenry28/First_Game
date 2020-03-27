@@ -109,6 +109,14 @@ std::vector<std::string> Game::parseChoice()
     {
         this->movePlayer(args.at(1));
     }
+    else if (cmd.compare("inventory") == 0)
+    {
+        this->player.printInv();
+    }
+    else if (cmd.compare("get") == 0 || cmd.compare("take") == 0)
+    {
+        this->currLoc->func1(&this->player, this->currLoc, args);
+    }
     
     return args;
 }

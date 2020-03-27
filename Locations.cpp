@@ -2,6 +2,9 @@
 
 Location::Location(std::string name)
 {
+    this->func1 = nullptr;
+    this->func2 = nullptr;
+    this->func3 = nullptr;
     this->name = name;
     this->brief = "There is nothing here.";
     this->description = "There is a whole lot of nothing here.";
@@ -105,6 +108,26 @@ void Location::printLoc()
      this->numItems -= removed;
  }
 
+
+/***** Initializers *****/
+/************************/
+void barn_take_axe(Player *this_player, Location *this_loc, std::vector<std::string> args)
+{
+    if (args.at(1).compare("ax") == 0 || args.at(1).compare("axe") == 0 || args.at(1).compare("wood") == 0)
+    {
+        Item &axe = this_loc->getItem("Wood Axe");
+        
+        if (axe.getName().compare("NONE") == 0)
+        {
+            std::cout << "There is no wood axe here!" << std::endl;
+            return;
+        }
+        
+        this_player->addItem(axe);
+        this_loc->removeItem("Wood Axe");
+    }
+}
+
 void initialize_main_graph(Game *game)
 {
     Location *field = new Location("Corn Field");
@@ -127,6 +150,7 @@ void initialize_main_graph(Game *game)
                    "although it looks like a determined vandal could bring the whole thing down. Several rusty farm tools are piled\n"
                    "up in the back corner. The only thing that looks salvagalbe is a wood axe.");
     barn->addItem(Item("Wood Axe"));
+    barn->func1 = barn_take_axe;
     field->setEast(barn);
     barn->setWest(field);
     

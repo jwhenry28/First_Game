@@ -12,6 +12,7 @@ class Item
 {
 public:
     Item(std::string name = "NONE");
+    Item(const Item& src);
     ~Item();
     void initialize(std::string name);
     

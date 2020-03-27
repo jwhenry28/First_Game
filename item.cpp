@@ -6,6 +6,11 @@ Item::Item(std::string name)
 }
 
 
+Item::Item(const Item& src)
+    : name {src.name} {
+}
+
+
 Item::~Item()
 {
 }

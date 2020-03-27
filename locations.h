@@ -4,6 +4,10 @@
 #include "Game.h"
 
 class Game;
+class Location;
+
+/* Callback function for each location */
+typedef void (*location_action_function) (Player *this_player, Location *this_loc, std::vector<std::string> args);
 
 class Location
 {
@@ -16,6 +20,19 @@ public:
     
     /* Accessors */
     inline const std::string& getName() const { return this->name; }
+    inline Item& getItem(const std::string &str)
+    {
+        for (size_t i = 0; i < this->numItems; i++)
+        {
+            if (this->itemArr[i]->getName().compare(str) == 0)
+            {
+                return *this->itemArr[i];
+            }
+        }
+        
+        Item *empty = new Item;
+        return *empty;
+    }
     
     /* Modifiers */
     inline void setBrief(std::string newBrief) { this->brief = newBrief; }
@@ -35,6 +52,9 @@ public:
     inline bool match(std::string query) const { return query.compare(this->name) == 0; }
     inline void printBrief() const { std::cout << brief << std::endl; }
     inline void printDescr() const { std::cout << description << std::endl; }
+    location_action_function func1; // reserved for get/take item
+    location_action_function func2; // reserved for use item or kill enemy
+    location_action_function func3; // reserved for misc action
     
 private:
     std::string name;
